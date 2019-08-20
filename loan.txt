@@ -1,0 +1,310 @@
+void Loan(void)
+ { 
+	int pin,i,pintemp,act,j,loan_amt,balance=100000;
+	long int account_no,test=0;
+	FILE *ptr,*newrec;
+	ptr=fopen("record.dat","r");
+	newrec=fopen("loan.dat","a");
+	printf("\n\tWant a Loan ? , We're here for you...\n");
+	printf("\tSelect 1 for Home Loan @ 10%\n");
+    printf("\tSelect 2 for Car Loan @ 10%\n");
+    printf("\tSelect 3 for Education Loan @ 8%\n");
+    printf("\tSelect 4 for Personal Loan @ 12%\n");
+    scanf("%d",&i);
+    switch(i)
+     {
+    	case 1:
+    	printf("\n\tApplying for home loan has never been easier!\n");
+    		printf("\tEnter your account number\n");
+    		scanf("%d",&check.acc_no);
+		while (fscanf(ptr,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,&add.pin,&add.address,&add.nationality,&add.phone,&add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
+         {
+    		 if(check.acc_no==add.acc_no)
+    		 { 
+			  test=1;
+			  printf("\tEnter Your PIN\n");
+    		  scanf("%d",&check.pin);
+    		  if(check.pin==add.pin)
+    		  {
+    		 	printf("\tHow much loan do you require?\n");
+    		 	scanf("%d",&loan_amt);
+    		 	printf("\tNow we will check for your account information and see if you are allowed to have this much loan\n");
+    		 	sleep(2);
+				 if(add.amt>=(loan_amt/10.0))
+    		 	 {
+    		 	 	printf("\tYou are Eligible to apply for this loan!\n");
+    		 	 	printf("\tDo you want to take the loan?\n\tPress 1 for Yes and 2 for No\n");
+    		 	 	scanf("%d",&j);
+					switch(j)
+					  {
+					   case 1:
+					   		printf("\tYour loan has been approved !!\n \tYour rate of interest is 10 percent annually\n\tKindly Deposit your aadhar card copy and bank statement at front desk and collect loan amount from money counter");
+					    	add.loanamt+=loan_amt;
+					    	add.rate=10;
+							fprintf(newrec,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.pin,add.address,add.nationality,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+							break;
+					   case 2:
+					   		printf("\n\tLoan cancelled by user");
+						    break;	
+					  }
+    		 	 	
+				 }
+				 else
+				  {
+				  	printf("\n\tYour current account balance is not enough to apply for a loan of  the given amount\n");
+				  }
+			    Loan1_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION);
+              	system("cls");
+ 				if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    Loan();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto Loan1_invalid;
+				 }
+			 }
+			 else
+			  {
+			  	printf("Wrong PIN Entered\n");
+			  }
+			  break;
+    	   }
+         }
+        if(test!=1)
+         {
+          printf("\n\nRecord not found!!");
+         }
+        goto Loan1_invalid;
+        break;	
+    	case 2:
+    	printf("\n\tApplying for car loan has never been easier!\n");
+    		printf("\tEnter your account number\n");
+    		scanf("%d",&check.acc_no);
+		while (fscanf(ptr,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,&add.pin,&add.address,&add.nationality,&add.phone,&add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
+         {
+			 if(check.acc_no==add.acc_no)
+    		 {
+    		 	test=1;
+    		  printf("\tEnter Your PIN\n");
+    		  scanf("%d",&check.pin);
+    		  if(add.pin==check.pin)
+    		  {
+    		 	printf("\tHow much loan do you require?\n");
+    		 	scanf("%d",&loan_amt);
+    		 	printf("\tNow we will check for your account information and see if you are allowed to have this much loan\n");
+    		 	sleep(2);
+				 if(add.amt>=(loan_amt/10.0))
+    		 	 {
+    		 	 	printf("\tYou are Eligible to apply for this loan!\n");
+    		 	 	printf("\tDo you want to take the loan? press 1 for Yes and 2 for No\n");
+    		 	 	scanf("%d",&j);
+					switch(j)
+					  {
+					   case 1:
+					   		printf("\nYour loan has been approved !!\n\t Your rate of interest is 10 percent annually\n\tKindly Deposit your aadhar card copy and bank statement at front desk and collect loan amount from money counter\n");
+					    	add.loanamt+=loan_amt;
+					    	add.rate=10;
+							fprintf(newrec,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.pin,add.address,add.nationality,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+							break;
+					   case 2:
+					   		printf("Loan cancelled by user\n");
+						    break;	
+					  }
+    		 	 	
+				 }
+				  else
+				  {
+				  	printf("\tYour current account balance is not enough to apply for a loan of  the given amount\n");
+				  }
+				Loan2_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION);
+ 				system("cls");
+				 if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    Loan();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto Loan2_invalid;
+				 }  
+			  }
+			 else
+			  {
+			  	printf("Wrong PIN Entered");
+			  }
+    		break;
+    	   }
+         }
+        if(test!=1)
+         {
+          printf("\n\nRecord not found!!");
+         }  
+        goto Loan2_invalid;
+        break;
+		case 3:
+    		printf("Applying for Education loan has never been easier!\n");
+    		printf("Enter your account number\n");
+    		scanf("%d",&check.acc_no);
+		while (fscanf(ptr,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,&add.pin,&add.address,&add.nationality,&add.phone,&add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
+         {
+    		 if(check.acc_no==add.acc_no)
+    		 {
+    		 	test=1;
+    		  printf("Enter Your PIN\n");
+    		  scanf("%d",&check.pin);
+    		  if(add.pin==check.pin)
+    		  {
+    		 	printf("How much loan do you require?\n");
+    		 	scanf("%d",&loan_amt);
+    		 	printf("Now we will check for your account information and see if you are allowed to have this much loan\n");
+    		 	sleep(2);
+				 if(add.amt>=(loan_amt/10.0))
+    		 	 {
+    		 	 	printf("You are Eligible to apply for this loan!\n");
+    		 	 	printf("Do you want to take the loan? press 1 for Yes and 2 for No\n");
+    		 	 	scanf("%d",&j);
+					switch(j)
+					  {
+					   case 1:
+					   		printf("Your loan has been approved !!\n Your rate of interest is 8 percent annually\nKindly Deposit your aadhar card copy and bank statement at front desk and collect loan amount from money counter\n");
+					    	add.loanamt+=loan_amt;
+					    	add.rate=10;
+							fprintf(newrec,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.pin,add.address,add.nationality,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+							break;
+					   case 2:
+					   		printf("Loan cancelled by user\n");
+						    break;	
+					  }
+    		 	 	
+				    }
+				  else
+				  {
+				  	printf("Your current account balance is not enough to apply for a loan of the given amount\n");
+				  }
+				  Loan3_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION );
+ 				system("cls");
+				 if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    Loan();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto Loan3_invalid;
+				 }
+			}
+			 else
+			  {
+			  	printf("Wrong PIN Entered");
+			  }
+    		break;
+    		}
+         }
+        if(test!=1)
+         {
+          printf("\n\nRecord not found!!");
+         }
+		goto Loan3_invalid;
+         break;
+		case 4:
+    		printf("Applying for Personal loan has never been easier!\n");
+    		printf("Enter your account number\n");
+    		scanf("%d",&check.acc_no);
+		while (fscanf(ptr,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,&add.pin,&add.address,&add.nationality,&add.phone,&add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
+         {
+         	if(check.acc_no==add.acc_no)
+    		 {
+    		 	test=1;
+    		printf("Enter Your PIN\n");
+    		scanf("%d",&check.pin);
+    		if(add.pin==check.pin)
+    		 {
+    		 	printf("How much loan do you require?\n");
+    		 	scanf("%d",&loan_amt);
+    		 	printf("Now we will check for your account information and see if you are allowed to have this much loan\n");
+    		 	sleep(2);
+				 if(add.amt>=(loan_amt/10.0))
+    		 	 {
+    		 	 	printf("You are Eligible to apply for this loan!\n");
+    		 	 	printf("Do you want to take the loan? press 1 for Yes and 2 for No\n");
+    		 	 	scanf("%d",&j);
+					switch(j)
+					  {
+					   case 1:
+					   		printf("Your loan has been approved !!\n Your rate of interest is 12 percent annually\nKindly Deposit your aadhar card copy and bank statement at front desk and collect loan amount from money counter\n");
+					    	add.loanamt+=loan_amt;
+					    	add.rate=10;
+							fprintf(newrec,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.pin,add.address,add.nationality,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+							break;
+					   case 2:
+					   		printf("Loan cancelled by user\n");
+						    break;	
+					  }
+    		 	 	
+				 }
+				  else
+				  {
+				  	printf("Your current account balance is not enough to apply for a loan of  the given amount\n");
+				  }
+				  Loan4_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION );
+ 				system("cls");
+				 if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    Loan();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto Loan4_invalid;
+				 }
+			 }
+			 else
+			  {
+			  	MessageBoxW(NULL,L"Wrong pin entered!",L"WARNING ! ",MB_OK | MB_ICONEXCLAMATION);
+			  }
+    		break;
+    		}
+         }
+        if(test!=1)
+         {
+          MessageBoxW(NULL,L"Record not found!!",L"ATTENTION ",MB_OK | MB_ICONEXCLAMATION);
+         }
+		goto Loan4_invalid;
+    	 break;
+		default:
+		 {
+    		printf("Wrong choice entered\n");
+			Loan5_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION);
+ 				system("cls");
+				 if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    Loan();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto Loan5_invalid;
+				 }
+			break;
+		 }
+	 }
+	 fclose(ptr);
+	 fclose(newrec);
+ }

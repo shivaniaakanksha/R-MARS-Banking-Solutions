@@ -1,0 +1,47 @@
+void debitcard(void)
+{
+	system("color 2F");
+	FILE *debit;
+	int test=0,act;
+	debit=fopen("record.dat","r");
+    printf("\n\tEnter the Account no. of DEBIT CARD applicant:\n\t");
+    scanf("%d",&check.acc_no);
+	while (fscanf(debit,"%d %s %d/%d/%d %d %d %s %s %s %s %f %d/%d/%d\n",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,&add.pin,&add.address,&add.nationality,&add.phone,&add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
+         {
+    	  if(check.acc_no==add.acc_no)
+    	   { 
+			test=1;
+			printf("\tEnter Your PIN\n\t");
+    		scanf("%d",&check.pin);
+    	    if(check.pin==add.pin)
+    		 {
+    		  printf("\n\tYour request have been accepted,contact Helpdesk for PIN when you recieve the DEBIT CARD.\n");
+	         }
+	        else
+	         {
+	      	  MessageBoxW(NULL,L"Wrong pin entered!",L"WARNING ! ",MB_OK | MB_ICONEXCLAMATION);
+		      goto debit_invalid;
+			 }
+           }
+		}
+        if(test==0)
+		   {
+			MessageBoxW(NULL,L"Record not found!!",L"ATTENTION ",MB_OK | MB_ICONEXCLAMATION);
+		   }
+	     debit_invalid:
+              	act= MessageBoxW(NULL,L"Press CONTINUE to RETRY OR Try Again to go to the MAIN MENU or CANCEL to EXIT",L"ACTION!",MB_CANCELTRYCONTINUE | MB_ICONQUESTION);
+ 				system("cls");
+				 if (act==10)
+                    menu();
+                else if (act==2)
+                    exit(1);
+                else if(act==11)
+                    debitcard();
+                else
+                 {
+				  printf("\nInvalid!\a");
+                  goto debit_invalid;
+				 }	   
+		   
+	     fclose(debit);
+}
